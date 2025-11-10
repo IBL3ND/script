@@ -1,7 +1,7 @@
 /*
-#!name=打飞机提醒 (自我循环版)
+#!name=打飞机提醒 (防超时+自我循环)
 #!desc=定时提醒并点击通知可跳转特定网址，在通用模式下可自动循环。
-#!author=by iBL3ND
+#!author=(Modified by iBL3ND)
 */
 
 const reminders = [
@@ -49,10 +49,10 @@ function sendReminder(reminder) {
 // 启动时安排提醒
 scheduleReminders();
 
-// === 关键修正 (依然需要) ===
+// === 关键修正 (必须保留!) ===
 // 告诉 Egern "初始配置已完成"，防止脚本被过早终止
 // 但通过 setTimeout 注册的定时器在脚本 $done 后依然会在后台生效
 setTimeout(() => {
   console.log("打飞机提醒脚本后台计时中……");
-  $done();
+  $done(); // 必须调用 $done() 来避免 "exec timeout"
 }, 200);
